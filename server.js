@@ -6,6 +6,8 @@
 // 5. define routes for our frontend angular application
 // 6. set the app to listen on a port so we can view it in our browser
 
+require('coffee-script/register');
+
 var express   = require('express'),
     app       = express(),
     bodyParser = require('body-parser'),

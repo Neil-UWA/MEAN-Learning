@@ -2,10 +2,10 @@
   "name": "Todo",
   "version": "0.0.0",
   "description": "simple todo application",
-  "main": "server.js",
+  "main": "server.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "coffee server.coffee"
   },
   "author": "Neil",
   "license": "ISC",

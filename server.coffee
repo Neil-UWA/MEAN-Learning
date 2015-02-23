@@ -8,10 +8,10 @@
 
 require('coffee-script/register')
 
-express   = require('express')
-app       = express()
-bodyParser = require('body-parser')
-mongoose  = require('mongoose')
+express     = require('express')
+app         = express()
+bodyParser  = require('body-parser')
+mongoose    = require('mongoose')
 
 # Databse
 mongoose.connect('mongodb://localhost/develop')
@@ -28,11 +28,10 @@ app.use(bodyParser())
 
 # Routes
 app.get('/api/todos', (req, res) ->
-    Todo.find((err, todos) ->
-      if err
-        res.end(err)
-      res.json(todos)
-    )
+  Todo.find((err, todos) ->
+    return res.end(err) if err
+    res.json(todos)
+  )
 )
 
 app.post('/api/todos', (req, res) ->
@@ -40,11 +39,9 @@ app.post('/api/todos', (req, res) ->
     text: req.body.text,
     done: false
   }, (err, todo) ->
-    if err
-      res.send(err)
+    return res.send(err) if err
     Todo.find((err, todos) ->
-      if err
-        res.send(err)
+      return res.send(err) if err
       res.json(todos)
     )
   )
@@ -54,12 +51,10 @@ app.delete('/api/todos/:todo_id', (req, res) ->
   Todo.remove({
     _id: req.params.todo_id
   }, (err, todo) ->
-    if err
-      res.send(err)
+    return res.send(err) if err
     Todo.find((err, todos) ->
-        if err
-          res.send(err)
-        res.json(todos)
+      return res.send(err) if err
+      res.json(todos)
     )
   )
 )
